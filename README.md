@@ -1,1 +1,1 @@
-# Music App for Parks & Rec Teen Coding Class
+# Trivia App for Parks & Rec Teen Coding Class
