@@ -1,3 +1,3 @@
 export default {
-    api: 'https://api.spotify.com/v1/search?type=artist'
+    api: 'https://opentdb.com/api.php?amount=10&type=multiple'
 }

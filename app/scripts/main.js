@@ -2,32 +2,59 @@ import $ from 'jquery';
 
 import settings from './settings';
 
-let searchForm = document.querySelector('.search-form');
-let input = document.querySelector('.search-query');
-let resultsUL = document.querySelector('.search-results');
+let startBtn = document.querySelector('.start-game');
+let questionsWrap = document.querySelector('.question-wrapper');
+let questionP = document.querySelector('.question');
+let answerList = document.querySelector('.answer-list');
 
-function listItems(data) {
-    console.log(data)
-    let results = data.map((artist) => {
-        let image = '/assets/images/placeholder.jpg';
-        if (artist.images[0]) { image = artist.images[0].url }
-        return $(`<li id=${artist.id}>
-            <div class="artist-image" style="background-image: url(${image})"></div>
-            <h4>${artist.name}</h4>
-        </li>`);
-    });
-    $(resultsUL).append(results);
-}
-
-function getArtists(q) {
-    $.ajax({
-    url: settings.api,
-    data: {q},
-    success:(d) => { listItems(d.artists.items) }
+$(document).ready(() => {
+    $(questionsWrap).hide();
 });
+
+function buildQuestion(questionObj,i) {
+    let answers = questionObj[i].incorrect_answers;
+    let question = questionObj[i].question;
+    if (question.indexOf('&#039;') !== -1) {
+        let removeChars = question.split('&#039;');
+        question = removeChars.join('');
+    }
+    if (question.indexOf('&quot;') !== -1) {
+        let removeChars = question.split('&quot;');
+        question = removeChars.join('');
+    }
+    answers.push(questionObj[i].correct_answer);
+    $(questionP).empty();
+    $(questionP).text(question);
+    $(answerList).empty();
+    answers.forEach((answer,i) => {
+        $(answerList).append(`
+            <fieldset>
+                <input type="radio" id="answer-${i}" value=${i} name="answer" />
+                <label for="answer-${i}">${answer}</label>
+            </fieldset>
+            `)
+    });
+    $(answerList).append('<div class="submit-wrapper"><input type="submit" value="submit" /></div>')
 }
 
-searchForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    getArtists(input.value);
+function getQuestions() {
+    $.ajax({
+        type: 'GET',
+        url: settings.api,
+        contentType: 'text/plain',
+        xhrFields: {
+            withCredentials: false
+          },
+        success: (d) => {
+            sessionStorage.setItem('questions', JSON.stringify(d));
+            let questions = $.parseJSON(sessionStorage.getItem('questions')).results;
+            buildQuestion(questions,0);
+        }
+    });
+}
+
+startBtn.addEventListener('click', () => {
+    $(questionsWrap).show();
+    $('nav').addClass('in-game');
+    getQuestions();
 });

@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Music App</title>
+        <title>Trivia App</title>
         <link rel="stylesheet" href="main.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
         <div id="container">
-            <h1>My Music</h1>
-            <form class="search-form">
-                <input class="search-query" type="text" placeholder="search" />
-                <input type="submit" value="search" />
-            </form>
-            <div>
-                <ul class="search-results">
-                </ul>
+            <nav>
+                <button class="start-game">New Game</button>
+            </nav>
+            <div class="question-wrapper">
+                <p class="question"></p>
+                <form class="answer-list">
+                </form>
             </div>
         </div>
         <script type="text/javascript" src="main.js"></script>
