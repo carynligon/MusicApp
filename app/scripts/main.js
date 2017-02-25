@@ -11,11 +11,13 @@ let score = {
 };
 let index = 0;
 const startBtn = document.querySelector('.start-game');
+const newGame = document.querySelector('.in-game-new button');
 const questionsWrap = document.querySelector('.question-wrapper');
 const questionP = document.querySelector('.question');
 const answerList = document.querySelector('.answer-list');
 
 $(document).ready(() => {
+    $(newGame).hide();
     let theater = Theater({
       "minSpeed": 100,
       "maxSpeed": 350
@@ -27,7 +29,7 @@ $(document).ready(() => {
 
 function checkAnswer(q,a) {
     let answer;
-    const nextBtn = ('<input type="submit" value="continue" class="next-question" />');
+    const nextBtn = ('<button type="submit" class="next-question">continue</button>');
     if (q.correct_answer === a) {
         score.correct++;
         answer = 'Yes!';
@@ -77,6 +79,7 @@ function buildQuestion(questionObj,i) {
         question = removeChars.join('');
     }
     answers.push(questionObj[i].correct_answer);
+    $('.counter').text(`${score.answered + 1} / 10`);
     $(questionP).empty();
     $(questionP).text(question);
     $(answerList).empty();
@@ -88,7 +91,13 @@ function buildQuestion(questionObj,i) {
             </fieldset>
             `)
     });
-    $(answerList).append('<div class="submit-wrapper"><input type="submit" value="submit" /></div>')
+    $('.answer-list input').change((e) => {
+        $('.answer-list input').parent().removeClass('selected');
+        if (e.target.checked) {
+            $(e.target).parent().addClass('selected');
+        }
+    })
+    $(answerList).append('<div class="submit-wrapper"><button type="submit">Submit</button></div>')
 }
 
 function getQuestions() {
@@ -107,16 +116,26 @@ function getQuestions() {
     });
 }
 
-startBtn.addEventListener('click', () => {
-    let score = {
+function startGame() {
+    score = {
         correct: 0,
         incorrect: 0,
         answered: 0
-    }
+    };
     $('.scene').removeClass('in');
     $(questionsWrap).addClass('in');
-    $('nav').addClass('in-game');
+    $('nav').hide();
+    $(newGame).show();
+    $('.counter').text('');
     getQuestions();
+}
+
+newGame.addEventListener('click', () => {
+        startGame();
+    });
+
+startBtn.addEventListener('click', () => {
+    startGame();
 });
 
 answerList.addEventListener('submit', (e) => {

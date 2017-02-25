@@ -24,9 +24,9 @@ nav {
     text-align: center;
     width: 100%;
 }
-nav.in-game {
-    background: $gray;
+.in-game-new {
     bottom: 0;
+    text-align: center;
 }
 nav button {
     background: transparent;
@@ -43,26 +43,35 @@ nav button:focus {
     cursor: pointer;
     outline: 0;
 }
-nav.in-game button {
+.in-game-new button {
+    background-color: transparent;
     border: 5px solid $secondary-accent;
     color: $secondary-accent;
-    margin-bottom: 2rem;
+    margin: 2rem;
     padding: 1rem;
 }
-nav.in-game button:hover {
+.in-game-new button:hover {
     background: $secondary-accent;
     color: #fff;
+    cursor: pointer;
+    outline: 0;
 }
 .scene {
     color: $secondary-accent;
     display: none;
     font-family: 'Barrio', 'avenir';
     font-size: 7rem;
-    padding-top: 100px;
+    padding: 100px 3rem 0 3rem;
     text-align: center;
 }
 .scene.in {
     display: block;
+}
+.counter {
+    color: $white;
+    position: absolute;
+    top: 10px;
+    left: 10px;
 }
 .question-wrapper {
     display: none;
@@ -71,7 +80,6 @@ nav.in-game button:hover {
     display: block;
 }
 .question-wrapper {
-    height: calc(100vh - 58px);
     margin: 0 auto;
     width: 100%;
 }
@@ -94,11 +102,13 @@ nav.in-game button:hover {
     border: 0;
     border-radius: 15px;
     margin: .5rem;
+    padding: .5rem 1rem;
     transition: all .3s;
     width: 40%;
 }
 .answer-list fieldset label {
     display: inline-block;
+    vertical-align: middle;
     width: 90%;
 }
 .answer-list fieldset label:hover,
@@ -108,27 +118,64 @@ nav.in-game button:hover {
 }
 .answer-list fieldset:hover,
 .answer-list fieldset:focus,
-.answer-list fieldset:active {
+.answer-list fieldset:active,
+.answer-list fieldset.selected {
     background: $accent;
     color: #fff;
     cursor: pointer;
+}
+.answer-list fieldset input {
+    display: none;
 }
 .answer-list .submit-wrapper {
     width: 100%;
     margin-top: 2rem;
     text-align: center;
 }
-.answer-list input[type="submit"] {
+.answer-list button {
     background: $accent;
     border: 3px solid $accent;
     color: #fff;
     font-size: 1rem;
     transition: all .3s;
 }
-.answer-list input[type="submit"]:hover,
-.answer-list input[type="submit"]:focus,
-.answer-list input[type="submit"]:active {
+.answer-list button:hover,
+.answer-list button:focus,
+.answer-list button:active {
     background: #fff;
     color: $accent;
     cursor: pointer;
+}
+
+@media screen and (max-width: 500px) {
+    .in-game-new {
+        padding: 1rem;
+    }
+    .in-game-new button {
+        margin: 1rem;
+    }
+    .scene {
+        font-size: 4rem;
+    }
+    .question-wrapper p {
+        padding: 5rem;
+    }
+    .answer-list {
+        margin-top: 1rem;
+    }
+    .answer-list fieldset {
+        width: 80%;
+    }
+    .answer-list button {
+        padding: .5rem 1rem;
+    }
+    .answer-list .submit-wrapper {
+        margin-top: .5rem;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .question-wrapper p {
+        padding: 3rem;
+    }
 }
