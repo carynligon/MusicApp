@@ -1,4 +1,5 @@
 @import 'variables';
+@import url('https://fonts.googleapis.com/css?family=Barrio');
 
 * {
     box-sizing: border-box;
@@ -30,7 +31,7 @@ nav.in-game {
 nav button {
     background: transparent;
     border: 0;
-    border-bottom: 3px solid $accent;
+    border-bottom: 3px solid $secondary-accent;
     color: #fff;
     font-size: 1rem;
     transition: all .3s;
@@ -43,14 +44,31 @@ nav button:focus {
     outline: 0;
 }
 nav.in-game button {
-    border: 5px solid $accent;
-    color: $accent;
+    border: 5px solid $secondary-accent;
+    color: $secondary-accent;
     margin-bottom: 2rem;
     padding: 1rem;
 }
 nav.in-game button:hover {
-    background: $accent;
+    background: $secondary-accent;
     color: #fff;
+}
+.scene {
+    color: $secondary-accent;
+    display: none;
+    font-family: 'Barrio', 'avenir';
+    font-size: 7rem;
+    padding-top: 100px;
+    text-align: center;
+}
+.scene.in {
+    display: block;
+}
+.question-wrapper {
+    display: none;
+}
+.question-wrapper.in {
+    display: block;
 }
 .question-wrapper {
     height: calc(100vh - 58px);
@@ -78,6 +96,15 @@ nav.in-game button:hover {
     margin: .5rem;
     transition: all .3s;
     width: 40%;
+}
+.answer-list fieldset label {
+    display: inline-block;
+    width: 90%;
+}
+.answer-list fieldset label:hover,
+.answer-list fieldset label:focus,
+.answer-list fieldset label:active {
+    cursor: pointer;
 }
 .answer-list fieldset:hover,
 .answer-list fieldset:focus,
