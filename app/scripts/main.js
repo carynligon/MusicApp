@@ -9,7 +9,6 @@ let score = {
     incorrect: 0,
     answered: 0
 };
-let index = 0;
 const startBtn = document.querySelector('.start-game');
 const newGame = document.querySelector('.in-game-new button');
 const questionsWrap = document.querySelector('.question-wrapper');
@@ -43,13 +42,12 @@ function checkAnswer(q,a) {
         answerList.innerHTML = nextBtn;
     }
     score.answered++;
-    index++;
     document.querySelector('.next-question').addEventListener('click', (e) => {
         if (score.answered === 10) {
             endGame();
         }
         else{
-            buildQuestion(questions,index);
+            buildQuestion(questions,score.answered);
         }
     });
 }
@@ -68,6 +66,11 @@ function endGame() {
 }
 
 function buildQuestion(questionObj,i) {
+    console.log(score)
+    if (!questionObj[i]) {
+        console.log(i);
+        console.log(questionObj);
+    }
     const answers = questionObj[i].incorrect_answers;
     let question = questionObj[i].question;
     if (question.indexOf('&#039;') !== -1) {
@@ -147,5 +150,5 @@ answerList.addEventListener('submit', (e) => {
             guess = answer.value;
         }
     });
-    checkAnswer(questions[index],guess);
+    checkAnswer(questions[score.answered],guess);
 });

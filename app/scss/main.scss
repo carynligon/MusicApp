@@ -1,5 +1,5 @@
 @import 'variables';
-@import url('https://fonts.googleapis.com/css?family=Barrio');
+@import url('https://fonts.googleapis.com/css?family=Carter+One');
 
 * {
     box-sizing: border-box;
@@ -48,6 +48,7 @@ nav button:focus {
     border: 5px solid $secondary-accent;
     color: $secondary-accent;
     margin: 2rem;
+    outline: 0;
     padding: 1rem;
 }
 .in-game-new button:hover {
@@ -59,7 +60,7 @@ nav button:focus {
 .scene {
     color: $secondary-accent;
     display: none;
-    font-family: 'Barrio', 'avenir';
+    font-family: 'Carter One', 'avenir', 'sans serif';
     font-size: 7rem;
     padding: 100px 3rem 0 3rem;
     text-align: center;
@@ -137,6 +138,7 @@ nav button:focus {
     border: 3px solid $accent;
     color: #fff;
     font-size: 1rem;
+    padding: 1rem 2rem;
     transition: all .3s;
 }
 .answer-list button:hover,
